@@ -180,29 +180,55 @@ def taulellDibuixar():
 # TABLERO
 
 def tauler():
-    c = [''] * 24 #c = casillas
+
+    global jugadors
+
+    # Definir el text que surt a cada casella del joc
+    c = [] #c = casilla
+    for cntCasella in range(0, 24):
+        txtCasella = " "
+        jugadorsCasella = 0
+
+        # Posar la lletra que correspon el jugador que hi ha a la casella (si n'hi ha)
+        for cntJugador in range(0, len(jugadors)):
+            if jugadors[cntJugador][idxPosicio] == cntCasella:
+                jugadorsCasella = jugadorsCasella + 1
+                color = jugadors[cntJugador][idxColor]
+                if color == "Verda":
+                    txtCasella = "D"
+                else:
+                    txtCasella = color[0]
+
+        # Si hi ha més d'un jugador apareix el número de jugadors
+        if jugadorsCasella > 1:
+            txtCasella = str(jugadorsCasella)
+
+        for i in range(0,24):
+            c.append("")
+
+
     
     print(f'''text  
 +--------+--------+--------+--------+--------+--------+--------+
-|{c [12]}|{c [13]}|{c [14]}|{c [15]}|{c [16]}|{c [17]}|{c [18]}|
+|{c [12]}        |{c [13]}        |{c [14]}        |{c [15]}        |{c [16]}        |{c [17]}        |{c [18]}        |
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
 +--------+--------+--------+--------+--------+--------+--------+
-|{c [11]}|                                            |{c [19]}|
+|{c [11]}        |                                            |{c [19]}        |
 |Aragó   |                                            |Angel   |
 +--------+                                            +--------+
-|{c [10]}|                                            |{c [20]}|
+|{c [10]}        |                                            |{c [20]}        |
 |S.Joan  |                                            |Augusta |
 +--------+                                            +--------+
-|{c [9]} |                                            |{c [21]}|
+|{c [9]}        |                                            |{c [21]}        |
 |Caixa   |                                            |Caixa   |
 +--------+                                            +--------+
-|{c [8]} |                                            |{c [22]}|
+|{c [8]}        |                                            |{c [22]}        |
 |Aribau  |                                            |Balmes  |
 +--------+                                            +--------+
-|{c [7]} |                                            |{c [23]}|
+|{c [7]}        |                                            |{c [23]}        |
 |Muntan  |                                            |Gracia  |
 +--------+--------+--------+--------+--------+--------+--------+
-|{c [6]} |{c [5]} |{c[ 4]} |{c [3]} |{c [2]} |{c [1]} |{c [0]} |
+|{c [6]}        |{c [5]}        |{c[ 4]}        |{c [3]}        |{c [2]}        |{c [1]}        |{c [0]}        |
 |Presó   |Consell |Marina  |Sort    |Rosell  |Lauria  |Sortida |
 +--------+--------+--------+--------+--------+--------+--------+
 ''')
