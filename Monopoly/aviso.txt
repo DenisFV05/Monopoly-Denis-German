@@ -1,0 +1,1 @@
+La finalidad de esta carpeta es tener el código final con el juego funcional
