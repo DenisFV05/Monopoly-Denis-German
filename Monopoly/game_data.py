@@ -1,0 +1,1 @@
+# Diccionarios y listas base que se van a usar en el juego 

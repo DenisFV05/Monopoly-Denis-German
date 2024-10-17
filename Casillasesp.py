@@ -87,6 +87,9 @@ def accion_casilla_caja(jugador):
         print(f"{jugador['nombre']} gana 10€ en un concurso de belleza.")
 
 # Clase Jugador para manejar las propiedades de cada jugador
+
+
+# Esto habria q hacerlo distinto - Denis
 jugadores = [
     {"nombre": "Jugador 1", "dinero": 1500, "en_prision": False, "tiene_carta_salir": False, "turnos_prision": 0, "posicion": 0, "casas": 0, "hoteles": 0},
     {"nombre": "Jugador 2", "dinero": 1500, "en_prision": False, "tiene_carta_salir": False, "turnos_prision": 0, "posicion": 0, "casas": 0, "hoteles": 0}
@@ -102,6 +105,7 @@ casillas = {
     "Caja": accion_casilla_caja
 }
 
+#Yo lo haria de otra forma - Denis
 # Simulación de tiradas
 for jugador in jugadores:
     for _ in range(5):  # Simular 5 tiradas
