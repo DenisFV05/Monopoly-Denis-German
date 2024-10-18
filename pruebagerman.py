@@ -1,57 +1,78 @@
-import random
+# MENÚ MONOPOLY + JUGADORES
 
-# Nombres de las casillas
-casillas = [
-    "Sortida", "Lauria", "Rosselló", "Marina", "Consell de cent", 
-    "Muntaner", "Aribau", "Sant Joan", "Aragó", "Urquinaona", 
-    "Fontana", "Les Rambles", "Plaça Catalunya", "Portal de l'Àngel", 
-    "Via Augusta", "Balmes", "Passeig de Gràcia"
-]
+colores_jugadores = ['Groc', 'Taronja', 'Vermell', 'Blau']
+jugadores_seleccionados = {}
 
-# Inicializar las posiciones de los jugadores y sus propiedades
-jugadores = {
-    'Groc': {'posicion': 0, 'dinero': 2000, 'propiedades': [], 'especial': None},
-    'Taronja': {'posicion': 0, 'dinero': 2000, 'propiedades': [], 'especial': None},
-    'Vermell': {'posicion': 0, 'dinero': 2000, 'propiedades': [], 'especial': None},
-    'Blau': {'posicion': 0, 'dinero': 2000, 'propiedades': [], 'especial': None}
-}
+# FUNCIÓN MENÚ
 
-# Función para mostrar el tablero
-def mostrar_tauler(jugadores, ordre_tirada):
-    # Crear una lista con las casillas vacías
-    tauler = {i: [] for i in range(len(casillas))}
+class Player:
+    def __init__(self, color):
+        self.color = color
+        self.name = self.get_name_from_color(color)
     
-    # Colocar los jugadores en sus respectivas posiciones según el orden de tirada
-    for jugador, data in jugadores.items():
-        posicion = data['posicion']
-        if posicion in tauler:  # Verificar que la posición exista en el tablero
-            tauler[posicion].append(jugador[0])  # Añadir la letra inicial del color (G, T, V, B)
-    
-    # Mostrar el orden de tirada en la casilla de salida (casilla 0)
-    tauler[0] = [j[0] for j in ordre_tirada]  # Colocar el orden de tirada en Sortida
-    
-    # Imprimir el tablero con las fichas de los jugadores
-    print("+--------+--------+--------+--------+--------+--------+--------+")
-    for i in range(0, 7):
-        print(f"|{casillas[i].ljust(8)}|{''.join(tauler[i]).ljust(8)}|")
-        print("+--------+--------+")
-    print()
+    def get_name_from_color(self, color):
+        color_names = {
+            'blau': 'B',
+            'taronja': 'T',
+            'vermell': 'V',
+            'groc': 'G'
+        }
+        return color_names.get(color.lower(), 'Unknown')
 
-# Función para mostrar la información de los jugadores
-def mostrar_informacio_jugadors(jugadores, ordre_tirada):
-    print("Banca: Diners: 10000000\n")
-    for jugador in ordre_tirada:
-        data = jugadores[jugador]
-        print(f"Jugador {jugador}:")
-        print(f"  Carrers: {', '.join(data['propiedades']) if data['propiedades'] else '(cap)'}")
-        print(f"  Diners: {data['dinero']}")
-        print(f"  Especial: {data['especial'] if data['especial'] else '(res)'}")
-        print()
 
-# Escoger un orden aleatorio para los jugadores
-ordre_tirada = list(jugadores.keys())
-random.shuffle(ordre_tirada)  # Orden aleatorio de los jugadores
+def mostrar_menu():
+    print ("======================================")
+    print ("---            MONOPOLY            ---")
+    print ("--------------------------------------")
+    print ("-------Hecho por: Denis y Germán------")
+    print ("======================================")
+    print ("======================================")
+    print ("----- Menú de Selección de Color -----")
+    print ("Seleccione su color:")
+    print ("1. Blau")
+    print ("2. Taronja")
+    print ("3. Vermell")
+    print ("4. Groc")
+    print ("5. Salir")
+    print ("---------------------------------------")
 
-# Mostrar el tablero y la información de los jugadores con el nuevo orden de tirada
-mostrar_tauler(jugadores, ordre_tirada)
-mostrar_informacio_jugadors(jugadores, ordre_tirada)
+def main():
+    players = []
+    mostrar_menu()
+
+    num_players = int(input("Ingrese número de jugadores (2-4): "))
+
+    if num_players < 2 or num_players > 4:
+        print("Lo siento, el número de jugadores debe estar entre 2 y 4.")
+        return
+
+    for i in range(num_players):
+        while True:
+            choice = input(f"Jugador {i + 1}, elija su color (1-4) o salga (5): ")
+            if choice == '1':
+                color = 'blau'
+                break
+            elif choice == '2':
+                color = 'taronja'
+                break
+            elif choice == '3':
+                color = 'vermell'
+                break
+            elif choice == '4':
+                color = 'groc'
+                break
+            elif choice == '5':
+                print("Saliendo de Monopoly...")
+                return
+            else:
+                print("Inténtelo de nuevo")
+
+        players.append(Player(color))
+        print(f"Jugador {i + 1} ha elegido el color {color} y su nombre es {players[-1].name}.")
+
+    print("\nJugadores en la partida:")
+    for jugador in players:
+        print(f"Color: {jugador.color}, Nombre: {jugador.name}")
+
+if __name__ == "__main__":
+    main()
