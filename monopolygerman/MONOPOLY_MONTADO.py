@@ -1,5 +1,5 @@
 import random
-
+import diccstemporales as dic
 # PRIMERA PARTE MENÚ + ORDEN DE TIRADA
 def mostrar_menu():
     print ("======================================")
@@ -109,11 +109,11 @@ def tauler(jugadores_ordenados):
         c[i] = c[i].ljust(6)
 
     print(f'''text  
++--------+--------+--------+--------+--------+--------+--------+                           
+|{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Banca
+|Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |  Diners: {banca}
 +--------+--------+--------+--------+--------+--------+--------+
-|{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |
-|Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
-+--------+--------+--------+--------+--------+--------+--------+
-|{c [11]}  |                                            |{c [19]}  |
+|{c [11]}  |                                            |{c [19]}  | 
 |Aragó   |                                            |Angel   |
 +--------+                                            +--------+
 |{c [10]}  |                                            |{c [20]}  |
@@ -132,6 +132,34 @@ def tauler(jugadores_ordenados):
 |Presó   |Consell |Marina  |Sort    |Rosell  |Lauria  |Sortida |
 +--------+--------+--------+--------+--------+--------+--------+
 ''')
+                                                    
+#INFO DE LOS JUGADORES A LA DERECHA:
+
+
+def mostrar_info_jugadores(color):
+
+    for color in jugadores_ordenados:
+        inicial = color['Inicial']
+        diners = color['Diners']
+        propietats = ",".join(color['Propietats']) if color ['Propietats'] else "(ninguna)"
+        especial = color['Especial'] if color ['Especial'] else "(res)"
+
+        print(f"| Jugador {color}:")
+        print(f"| {inicial} | Carrers: {propietats}")
+        print(f"| Diners: {diners} | Especial: {especial}")
+
+
+    mostrar_info_jugadores(jugadores_ordenados)
+
+banca = 1000000
+
+def banca_check():
+    global banca
+    if banca <= 500000:
+        banca = banca + 1000000
+    return
+
+
 
 #TERCERA PARTE: MOVIMIENTO DE JUGADORES USANDO EL ORDEN DEFINIDO
 

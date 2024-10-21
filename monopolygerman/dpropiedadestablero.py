@@ -1,6 +1,3 @@
-
-
-
 jugadores = {
     'Groc': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'G', 'Posició': 0},
     'Taronja': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'T', 'Posició': 0},
