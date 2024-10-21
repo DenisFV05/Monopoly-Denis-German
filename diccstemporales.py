@@ -26,25 +26,25 @@ players = {
     "J-Vermell":{
         "nom":"V",
         "carrers":[],
-        "diners":0,
+        "diners":2000,
         "cartes":[]
     },
     "J-Groc":{
         "nom":"G",
         "carrers":[],
-        "diners":0,
+        "diners":2000,
         "cartes":[]
     },
     "J-Taronja":{
         "nom":"T",
         "carrers":[],
-        "diners":0,
+        "diners":2000,
         "cartes":[]
     },
     "J-Blau":{
         "nom":"B",
         "carrers":[],
-        "diners":0,
+        "diners":2000,
         "cartes":[]
     },
 }
@@ -174,4 +174,52 @@ preus = {
         "Cmp. Casa": 525,
         "Cmp. Hotel": 360
     }
+}
+
+
+
+
+
+
+
+tablero = {
+    "Sortida": {"posicion": 0}, 
+
+    "Lauria": {"posicion": 1, "precio": preus["Lauria"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Rossell": {"posicion": 2, "precio": preus["Rosselló"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Sort": {"posicion": 3},  
+
+    "Marina": {"posicion": 4, "precio": preus["Marina"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Consell": {"posicion": 5, "precio": preus["C. de cent"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Presó": {"posicion": 6},
+
+    "Muntan": {"posicion": 7, "precio": preus["Muntaner"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Aribau": {"posicion": 8, "precio": preus["Aribau"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Caixa": {"posicion": 9},  
+
+    "S.Joan": {"posicion": 10, "precio": preus["Sant Joan"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Aragó": {"posicion": 11, "precio": preus["Aragó"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Parking": {"posicion": 12},
+
+    "Urquina": {"posicion": 13, "precio": preus["Urquinaona"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Fontan": {"posicion": 14, "precio": preus["Fontana"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Sort 2": {"posicion": 15},
+
+    "Rambles": {"posicion": 16, "precio": preus["Les Rambles"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Pl.Cat": {"posicion": 17, "precio": preus["Pl. Catalunya"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Anr pró": {"posicion": 18},
+
+    "P.Àngel": {"posicion": 19, "precio": preus["P. Àngel"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Augusta": {"posicion": 20, "precio": preus["Via Augusta"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+
+    "Caixa 2": {"posicion": 21}, 
+
+    "Balmes": {"posicion": 22, "precio": preus["Balmes"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
+    "Gràcia": {"posicion": 23, "precio": preus["Pg. de Gràcia"]["Cmp. Trrny"], "casas": 0, "hoteles": 0},
 }
