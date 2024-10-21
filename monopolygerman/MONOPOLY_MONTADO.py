@@ -1,5 +1,5 @@
 import random
-import diccstemporales as dic
+
 # PRIMERA PARTE MENÚ + ORDEN DE TIRADA
 def mostrar_menu():
     print ("======================================")
@@ -105,23 +105,32 @@ def tauler(jugadores_ordenados):
         posicion = jugador['Posició']
         c[posicion] += inicial
 
+    info_jugadores = []
+    for jugador in jugadores_ordenados:
+        inicial = jugador['Inicial']
+        diners = jugador['Diners']
+        propietats = ",".join(jugador['Propietats']) if jugador['Propietats'] else "(ninguna)"
+        especial = jugador['Especial'] if jugador['Especial'] else "(res)"
+        info_jugadores.append(f"Jugador {inicial} | Diners: {diners} | Carrers: {propietats} | Especial: {especial}")
+
+
     for i in range(len(c)):
         c[i] = c[i].ljust(6)
 
     print(f'''text  
-+--------+--------+--------+--------+--------+--------+--------+                           
-|{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Banca
-|Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |  Diners: {banca}
-+--------+--------+--------+--------+--------+--------+--------+
++--------+--------+--------+--------+--------+--------+--------+  Banca                          
+|{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
+|Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
++--------+--------+--------+--------+--------+--------+--------+  {info_jugadores[0] if len(info_jugadores) > 0 else ""}
 |{c [11]}  |                                            |{c [19]}  | 
 |Aragó   |                                            |Angel   |
-+--------+                                            +--------+
++--------+                                            +--------+  {info_jugadores[1] if len(info_jugadores) > 1 else ""}
 |{c [10]}  |                                            |{c [20]}  |
 |S.Joan  |                                            |Augusta |
-+--------+                                            +--------+
++--------+                                            +--------+  {info_jugadores[2] if len(info_jugadores) > 2 else ""}
 |{c [9]}  |                                            |{c [21]}  |
 |Caixa   |                                            |Caixa   |
-+--------+                                            +--------+
++--------+                                            +--------+  {info_jugadores[3] if len(info_jugadores) > 3 else ""}
 |{c [8]}  |                                            |{c [22]}  |
 |Aribau  |                                            |Balmes  |
 +--------+                                            +--------+
