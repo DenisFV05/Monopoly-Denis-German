@@ -149,37 +149,25 @@ def menuPrincipal():
             elif menuOpcioNum == 4:
                 assignarColor("Groga")
             elif menuOpcioNum == 5:
-                jocJugar()
-
-# Dibuixa el taulell de joc
-def taulellDibuixar():
-    global jugadors
-
-    # Definir el text que surt a cada casella del joc
-    t = []
-    for cntCasella in range(0, 54):
-        txtCasella = " "
-        jugadorsCasella = 0
-
-        # Posar la lletra que correspon el jugador que hi ha a la casella (si n'hi ha)
-        for cntJugador in range(0, len(jugadors)):
-            if jugadors[cntJugador][idxPosicio] == cntCasella:
-                jugadorsCasella = jugadorsCasella + 1
-                color = jugadors[cntJugador][idxColor]
-                if color == "Verda":
-                    txtCasella = "D"
-                else:
-                    txtCasella = color[0]
-
-        # Si hi ha més d'un jugador apareix el número de jugadors
-        if jugadorsCasella > 1:
-            txtCasella = str(jugadorsCasella)
-
-        t.append(txtCasella)
+                joc_Jugar()
 
 # TABLERO
 
+jugadores = {
+    'Groc': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'G', 'Posició': 0},
+    'Taronja': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'T', 'Posició': 0},
+    'Vermell': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'V', 'Posició': 0},
+    'Blau': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'B', 'Posició': 0}
+}
+
 def tauler():
+
+    def inicialesyposiciones(jugadores):
+        for jugador in jugadores:
+            inicial = jugadores[jugador]['inicial']
+        posicion = jugadores[jugador]['posicion']
+        c[posicion] +- inicial
+
 
     global jugadors
 
@@ -234,6 +222,7 @@ def tauler():
 ''')
 tauler()
 
+
 # NO SÉ SI ESTÁ BIEN
 # JUGADORES:
 # JUGADORES:
@@ -250,10 +239,10 @@ casillas = [
 ]
 
 jugadores = {
-    'Groc': {'Posició': 0, 'Diners': 2000, 'Propietats': [], 'Especial': None},
-    'Taronja': {'Posició': 0, 'Diners': 2000, 'Propietats': [], 'Especial': None},
-    'Vermell': {'Posició': 0, 'Diners': 2000, 'Propietats': [], 'Especial': None},
-    'Blau': {'Posició': 0, 'Diners': 2000, 'Propietats': [], 'Especial': None}
+    'Groc': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'G', 'Posició': 0},
+    'Taronja': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'T', 'Posició': 0},
+    'Vermell': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'V', 'Posició': 0},
+    'Blau': {'Diners': 2000, 'Propietats': [], 'Especial': None, 'Inicial' : 'B', 'Posició': 0}
 }
 
 def mostra_tauler(jugadores,orden_tirada):
