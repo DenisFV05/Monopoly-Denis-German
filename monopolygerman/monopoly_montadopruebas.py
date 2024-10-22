@@ -123,13 +123,13 @@ def tauler(jugadores_ordenados, log_movimientos):
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
 +--------+--------+--------+--------+--------+--------+--------+  {info_jugadores[0] if len(info_jugadores) > 0 else ""}
 |{c [11]}  |                                            |{c [19]}  | 
-|Aragó   |  {log_movimientos[0].ljust(44)}                                           |Angel   |
+|Aragó   |{log_movimientos[0].ljust(44)}|Angel   |
 +--------+                                            +--------+  {info_jugadores[1] if len(info_jugadores) > 1 else ""}
 |{c [10]}  |                                            |{c [20]}  |
-|S.Joan  |  {log_movimientos[1].ljust(44)}                                            |Augusta |
+|S.Joan  |  {log_movimientos[1].ljust(44)}|Augusta |
 +--------+                                            +--------+  {info_jugadores[2] if len(info_jugadores) > 2 else ""}
 |{c [9]}  |                                            |{c [21]}  |
-|Caixa   |  {log_movimientos[1].ljust(44)}                                            |Caixa   |
+|Caixa   |  {log_movimientos[1].ljust(44)}|Caixa   |
 +--------+                                            +--------+  {info_jugadores[3] if len(info_jugadores) > 3 else ""}
 |{c [8]}  |                                            |{c [22]}  |
 |Aribau  |                                            |Balmes  |
