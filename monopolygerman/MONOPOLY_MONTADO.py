@@ -33,7 +33,7 @@ def ordre_tirada(players):
     orden = "".join([player['Inicial'] for player in players])
     print(f"\nOrdre de tirada aleatori: {orden}")
     return players  # Se devuelve la lista de jugadores ordenada
-
+    
 # Función principal
 def main():
     players = []  # Lista para almacenar a los jugadores
