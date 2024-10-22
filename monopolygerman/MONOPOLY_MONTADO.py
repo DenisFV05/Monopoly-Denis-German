@@ -13,7 +13,7 @@ def mostrar_menu():
     print ("1. Blau")
     print ("2. Taronja")
     print ("3. Vermell")
-    print ("4. Groc")
+    print ("4. Groc")   
     print ("5. Salir")
     print ("---------------------------------------")
 
@@ -117,7 +117,7 @@ def tauler(jugadores_ordenados, log_movimientos):
     for i in range(len(c)):
         c[i] = c[i].ljust(6)
 
-    print(f'''  
+    print(f''' 
 +--------+--------+--------+--------+--------+--------+--------+  Banca                           
 |{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
@@ -129,10 +129,10 @@ def tauler(jugadores_ordenados, log_movimientos):
 |S.Joan  |{log_movimientos[1].ljust(44)}|Augusta |
 +--------+                                            +--------+  {info_jugadores[2] if len(info_jugadores) > 2 else ""}
 |{c [9]}  |                                            |{c [21]}  |
-|Caixa   |{log_movimientos[2].ljust(44)}|Caixa   |
+|Caixa   |{log_movimientos[1].ljust(44)}|Caixa   |
 +--------+                                            +--------+  {info_jugadores[3] if len(info_jugadores) > 3 else ""}
 |{c [8]}  |                                            |{c [22]}  |
-|Aribau  |{log_movimientos[2].ljust(44)}|Balmes  |
+|Aribau  |                                            |Balmes  |
 +--------+                                            +--------+
 |{c [7]}  |                                            |{c [23]}  |
 |Muntan  |                                            |Gracia  |
@@ -173,7 +173,7 @@ def mover_jugadores(jugador, jugadores_ordenados, log_movimientos):
             log_movimientos[jugadores_ordenados.index(jugador)] += f" \"{jugador['Inicial']}\" segueix a la presó."
     else:
         dado1, dado2 = tirar_dados()
-        log_movimientos[jugadores_ordenados.index(jugador)] = f"Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
+        log_movimientos[jugadores_ordenados.index(jugador)] = f"> Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
         jugador['Posició'] = (jugador['Posició'] + dado1 + dado2) % 24
 
     tauler(jugadores_ordenados, log_movimientos)  # Actualizar el tablero
@@ -185,6 +185,10 @@ def jugar(jugadores_ordenados):
         for jugador in jugadores_ordenados:
             mover_jugadores(jugador, jugadores_ordenados, log_movimientos)  # Ahora se pasa log_movimientos correctamente
             input("Presiona Enter para el siguiente jugador...")  # Pausa entre turnos para cada jugador
+            log_movimientos.pop(0)
+            log_movimientos.append("")
+
+
 
 # EJECUTAR EL JUEGO
 jugadores_ordenados = main()

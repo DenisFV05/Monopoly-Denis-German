@@ -117,7 +117,7 @@ def tauler(jugadores_ordenados, log_movimientos):
     for i in range(len(c)):
         c[i] = c[i].ljust(6)
 
-    print(f'''text  
+    print(f'''  
 +--------+--------+--------+--------+--------+--------+--------+  Banca                           
 |{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
@@ -126,13 +126,13 @@ def tauler(jugadores_ordenados, log_movimientos):
 |Aragó   |{log_movimientos[0].ljust(44)}|Angel   |
 +--------+                                            +--------+  {info_jugadores[1] if len(info_jugadores) > 1 else ""}
 |{c [10]}  |                                            |{c [20]}  |
-|S.Joan  |  {log_movimientos[1].ljust(44)}|Augusta |
+|S.Joan  |{log_movimientos[1].ljust(44)}|Augusta |
 +--------+                                            +--------+  {info_jugadores[2] if len(info_jugadores) > 2 else ""}
 |{c [9]}  |                                            |{c [21]}  |
-|Caixa   |  {log_movimientos[1].ljust(44)}|Caixa   |
+|Caixa   |{log_movimientos[2].ljust(44)}|Caixa   |
 +--------+                                            +--------+  {info_jugadores[3] if len(info_jugadores) > 3 else ""}
 |{c [8]}  |                                            |{c [22]}  |
-|Aribau  |                                            |Balmes  |
+|Aribau  |{log_movimientos[2].ljust(44)}|Balmes  |
 +--------+                                            +--------+
 |{c [7]}  |                                            |{c [23]}  |
 |Muntan  |                                            |Gracia  |
@@ -164,7 +164,7 @@ def mover_jugadores(jugador, jugadores_ordenados, log_movimientos):
         dado1, dado2 = tirar_dados()
         log_movimientos[jugadores_ordenados.index(jugador)] = f"Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
         
-        # Si saca dobles, sale de la prisión
+        # Si saca dobles, sale de la prisión    
         if dado1 == dado2:
             log_movimientos[jugadores_ordenados.index(jugador)] += f" \"{jugador['Inicial']}\" surt de la presó"
             jugador['Especial'] = None
