@@ -93,7 +93,7 @@ def main():
 
 #SEGUNDA PARTE: ACTUALIZAR TABLERO Y JUEGO CON EL ORDEN CORRECTO
 
-def tauler(jugadores_ordenados):
+def tauler(jugadores_ordenados, log_movimientos):
     # Definir el texto que sale en cada casilla del juego
     c = []  # c = casilla
     for i in range(0, 24):
@@ -104,9 +104,6 @@ def tauler(jugadores_ordenados):
         inicial = jugador['Inicial']
         posicion = jugador['Posició']
         c[posicion] += inicial
-
-    if log_movimientos is None:
-        log_movimientos = [""] * 4
 
     info_jugadores = []
     for jugador in jugadores_ordenados:
@@ -121,7 +118,7 @@ def tauler(jugadores_ordenados):
         c[i] = c[i].ljust(6)
 
     print(f'''text  
-+--------+--------+--------+--------+--------+--------+--------+  Banca                          
++--------+--------+--------+--------+--------+--------+--------+  Banca                           
 |{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
 +--------+--------+--------+--------+--------+--------+--------+  {info_jugadores[0] if len(info_jugadores) > 0 else ""}
@@ -144,34 +141,14 @@ def tauler(jugadores_ordenados):
 |Presó   |Consell |Marina  |Sort    |Rosell  |Lauria  |Sortida |
 +--------+--------+--------+--------+--------+--------+--------+
 ''')
-                                                    
-#INFO DE LOS JUGADORES A LA DERECHA:
-
-
-def mostrar_info_jugadores(color):
-
-    for color in jugadores_ordenados:
-        inicial = color['Inicial']
-        diners = color['Diners']
-        propietats = ",".join(color['Propietats']) if color ['Propietats'] else "(ninguna)"
-        especial = color['Especial'] if color ['Especial'] else "(res)"
-
-        print(f"| Jugador {color}:")
-        print(f"| {inicial} | Carrers: {propietats}")
-        print(f"| Diners: {diners} | Especial: {especial}")
-
-
-    mostrar_info_jugadores(jugadores_ordenados)
 
 banca = 1000000
 
 def banca_check():
     global banca
     if banca <= 500000:
-        banca = banca + 1000000
+        banca += 1000000
     return
-
-
 
 #TERCERA PARTE: MOVIMIENTO DE JUGADORES USANDO EL ORDEN DEFINIDO
 
@@ -203,17 +180,13 @@ def mover_jugadores(jugador, jugadores_ordenados, log_movimientos):
 
 # Función para jugar el turno de cada jugador
 def jugar(jugadores_ordenados):
-    log_movimientos = [""]
-
-# Función para jugar el turno de cada jugador
-def jugar(jugadores_ordenados):
+    log_movimientos = [""] * len(jugadores_ordenados)  # Iniciar el log de movimientos para cada jugador
     while True:
         for jugador in jugadores_ordenados:
-            mover_jugadores(jugador, jugadores_ordenados)
-            input("Presiona Enter para el siguiente jugador...")
+            mover_jugadores(jugador, jugadores_ordenados, log_movimientos)  # Ahora se pasa log_movimientos correctamente
+            input("Presiona Enter para el siguiente jugador...")  # Pausa entre turnos para cada jugador
 
-# CUARTA PARTE: INICIO DEL JUEGO
-if __name__ == "__main__":
-    jugadores_ordenados = main()  # Obtener el orden de jugadores de la primera parte
-    if jugadores_ordenados:  # Solo jugar si hay jugadores seleccionados
-        jugar(jugadores_ordenados)  # Iniciar el juego con ese orden
+# EJECUTAR EL JUEGO
+jugadores_ordenados = main()
+if jugadores_ordenados:
+    jugar(jugadores_ordenados)
