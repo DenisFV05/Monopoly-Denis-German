@@ -26,20 +26,7 @@ def add_evento(evento):
         historial.pop(0)
 
 
-def player_data():
-    for jugador, datos in players.items():
-        print(f"{datos['nom']} - Diners: {datos['diners']} €")
-        print("  Propietats:", ", ".join(datos['carrers']) if datos['carrers'] else "Cap")
-        print("  Cartes especials:", ", ".join(datos['cartes']) if datos['cartes'] else "Cap")
-        print("-" * 20)
 
-
-posiciones = {
-    "J-Vermell": 0,
-    "J-Groc": 0,
-    "J-Taronja": 0,
-    "J-Blau": 0
-}
 
 
 
@@ -117,50 +104,12 @@ def banca_check():
 def iniciar_joc():
     colors = ['G', 'T', 'V', 'B']  # Groc, Taronja, Vermell, Blau
     random.shuffle(colors)  # Aleatoritza l'ordre dels jugadors
-    jugadors = {color: {"diners": 2000, "posicio": 0, "propietats": [], "preso": False, "torns_preso": 0} for color in colors}
+   # jugadors = {} for color in colors}
     banca = 10000000
-    return jugadors, banca
-
-jugadors, banca = iniciar_joc()
+    return 
 
 
 
-
-
-def crear_taulell():
-    carrers = [
-        {"nom": "Sortida", "tipus": "especial"},
-        {"nom": "Lauria", "tipus": "carrer", "preu": 50, "lloguer_casa": 10, "lloguer_hotel": 15, "propietari": None, "cases": 0, "hotels": 0},
-        {"nom": "Rosselló", "tipus": "carrer", "preu": 50, "lloguer_casa": 10, "lloguer_hotel": 15, "propietari": None, "cases": 0, "hotels": 0},
-        # Afegir altres carrers i caselles especials
-        {"nom": "Presó", "tipus": "especial"},
-        {"nom": "Pg. de Gràcia", "tipus": "carrer", "preu": 80, "lloguer_casa": 50, "lloguer_hotel": 50, "propietari": None, "cases": 0, "hotels": 0},
-    ]
-    return carrers
-
-taulell = crear_taulell()
-
-
-def tirar_daus():
-    dau1 = random.randint(1, 6)
-    dau2 = random.randint(1, 6)
-    return dau1, dau2
-
-def moure_jugador(jugador, moviment, players, posicions, taulell):
-    pos_actual = posicions[jugador]
-    nova_pos = (pos_actual + moviment) % len(taulell)  # Es mou i si passa de l'última casella, torna a la "Sortida"
-    
-    if nova_pos < pos_actual:  # Ha passat per la sortida
-        players[jugador]["diners"] += 200  # Gana 200€ per passar la sortida
-        add_evento(f"{players[jugador]['nom']} passa per la Sortida i guanya 200€.")
-    
-    posicions[jugador] = nova_pos  # Actualitzem la posició del jugador
-    casella = taulell[nova_pos]
-    
-    add_evento(f"{players[jugador]['nom']} cau a {casella}.")
-    
-    # Tornar el nom de la casella
-    return casella
 
 
 
