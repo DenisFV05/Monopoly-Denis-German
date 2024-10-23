@@ -6,25 +6,33 @@ players = {
         "nom":"V",
         "carrers":[],
         "diners":2000,
-        "cartes":[]
+        "cartes":[],
+        "posicion": 0,
+        "carcel": False
     },
     "J-Groc":{
         "nom":"G",
         "carrers":[],
         "diners":2000,
-        "cartes":[]
+        "cartes":[],
+        "posicion": 0,
+        "carcel": False
     },
     "J-Taronja":{
         "nom":"T",
         "carrers":[],
         "diners":2000,
-        "cartes":[]
+        "cartes":[],
+        "posicion": 0,
+        "carcel": False
     },
     "J-Blau":{
         "nom":"B",
         "carrers":[],
         "diners":2000,
-        "cartes":[]
+        "cartes":[],
+        "posicion": 0,
+        "carcel": False
     },
 }
 
