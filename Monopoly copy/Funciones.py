@@ -68,6 +68,38 @@ def comprar_propiedad(jugador):
         else:
             add_historial("Esta propiedad ya pertenece a alguien.")
 
+
+def pagar_alquiler(jugador, propietario, propiedad):
+    casas = gd.tablero[propiedad]["casas"]
+    hoteles = gd.tablero[propiedad]["hotels"]
+    if casas == 0 and hoteles == 0:
+        add_historial(f"{jugador} no tiene que pagar alquiler porque {propietario} no tiene casas ni hoteles en {propiedad}.")
+        return
+    alquiler_total = 0
+    if casas > 0:
+        alquiler_total += gd.tablero[propiedad]["Ll. Casa"] * casas
+    if hoteles > 0:
+        alquiler_total += gd.tablero[propiedad]["Ll. Hotel"] * hoteles
+    if gd.players[jugador]["diners"] >= alquiler_total:
+        gd.players[jugador]["diners"] -= alquiler_total
+        gd.players[propietario]["diners"] += alquiler_total
+        add_historial(f"{jugador} ha pagado {alquiler_total}€ de alquiler a {propietario} por {propiedad} (incluyendo {casas} casa(s) y {hoteles} hotel(s)).")
+    else:
+        add_historial(f"{jugador} no tiene suficiente dinero para pagar el alquiler de {alquiler_total}€ por {propiedad}.")
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 jugadores_ordenados = ordre_tirada(gd.players) 
 
 def tauler():
@@ -129,9 +161,17 @@ def mover_jugadores(jugador_key):
         if dado1 == dado2:
             jugador['carcel'] = False
             jugador['turnos_prision'] = 0
+            # Guardamos la posición anterior antes de mover al jugador
+            posicion_anterior = jugador['posicion']
             jugador['posicion'] = (jugador['posicion'] + dado1 + dado2) % 24
+            
             add_historial(f"{jugador_key} ha tret dobles i ha sortir de la presó.")
             add_historial(f"{jugador_key} es mou a la posició {jugador['posicion']}.")
+
+            # Comprobamos si ha pasado por la casilla de salida
+            if jugador['posicion'] < posicion_anterior:
+                jugador['diners'] += 200
+                add_historial(f"{jugador_key} ha pasado por la casilla de Sortida y recibe 200€.")
         else:
             jugador['turnos_prision'] -= 1
             if jugador['turnos_prision'] <= 0:
@@ -142,8 +182,19 @@ def mover_jugadores(jugador_key):
                 add_historial(f"A {jugador_key} li quedan {jugador['turnos_prision']} turns en la presó.")
     else:
         dado1, dado2 = tirar_dados()
-        jugador['posicion'] = (jugador['posicion'] + dado1 + dado2) % 24
+        avance = dado1 + dado2
+        posicion_anterior = jugador['posicion']
+        jugador['posicion'] = (jugador['posicion'] + avance) % 24
+
         add_historial(f"{jugador_key} ha avanzado a la posición {jugador['posicion']}.")
+
+        # Comprobamos si el jugador ha pasado por la casilla de salida
+        if jugador['posicion'] < posicion_anterior:
+            jugador['diners'] += 200
+            add_historial(f"{jugador_key} ha pasado por la casilla de Sortida y recibe 200€.")
+    
+    # Actualizamos el tablero
     tauler()
+
 
 
