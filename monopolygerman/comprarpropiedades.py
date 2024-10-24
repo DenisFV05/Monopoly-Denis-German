@@ -3,24 +3,7 @@ def add_historial(mensaje):
     # para q no salga todo en amarillo mas q nada, ahora lo muevo
     pass
 
-# Función para comprar una propiedad
-def comprar_propiedad(jugador):
-    for x in gd.tablero:
-        if gd.tablero[x]["propietario"] == "banca":
-            if gd.players[jugador]["posicion"] == gd.tablero[x]["posicion"]:
-                precio = gd.tablero[x]["precio"]
-                if gd.players[jugador]["dinero"] >= precio:
-                    gd.players[jugador]["dinero"] -= precio
-                    gd.tablero[x]["propietario"] = jugador
-                    gd.players[jugador]["propiedades"].append(x)
-                    add_historial(f"{jugador} ha comprado {x} por {precio}€.")
-                else:
-                    add_historial(f"No tienes suficiente dinero para comprar {x}.")
-                return  # Salimos de la función después de intentar comprar
 
-    add_historial("Esta propiedad ya pertenece a alguien o no se ha encontrado.")
-
-# Función para comprar una casa
 def comprar_casa(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
