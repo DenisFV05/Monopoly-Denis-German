@@ -1,2 +1,2 @@
-import monopolygerman.game_data as game_data
-import Funciones
+import game_data as gd
+import Funciones as f
