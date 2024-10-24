@@ -1,3 +1,9 @@
+import game_data as gd
+def add_historial(mensaje):
+    # para q no salga todo en amarillo mas q nada, ahora lo muevo
+    pass
+
+# Función para comprar una propiedad
 def comprar_propiedad(jugador):
     for x in gd.tablero:
         if gd.tablero[x]["propietario"] == "banca":
@@ -14,7 +20,7 @@ def comprar_propiedad(jugador):
 
     add_historial("Esta propiedad ya pertenece a alguien o no se ha encontrado.")
 
-
+# Función para comprar una casa
 def comprar_casa(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
@@ -36,7 +42,7 @@ def comprar_casa(jugador):
     else:
         add_historial("No tienes propiedades para construir casas.")
 
-
+# Función para comprar un hotel
 def comprar_hotel(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
@@ -61,7 +67,7 @@ def comprar_hotel(jugador):
     else:
         add_historial("No tienes propiedades para construir hoteles.")
 
-
+# Función para mostrar precios de casas y hoteles
 def mostrar_precios(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
@@ -76,7 +82,7 @@ def mostrar_precios(jugador):
     else:
         add_historial("No te encuentras en una propiedad para consultar precios.")
 
-
+# Función para calcular el precio de venta al banco
 def precio_banco(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
@@ -84,7 +90,7 @@ def precio_banco(jugador):
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades al banco.")
 
-
+# Función para calcular el precio de venta a otro jugador
 def precio_jugador(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
@@ -92,9 +98,26 @@ def precio_jugador(jugador):
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades a otro jugador.")
 
-
+# Función para vender propiedades al banco
 def vendre_al_banc(jugador):
     for propiedad in gd.players[jugador]["propiedades"]:
         precio_venta = gd.tablero[propiedad]["precio"] * 0.5  # 50% del precio de compra
         gd.players[jugador]["dinero"] += precio_venta
         gd.tablero[propiedad]["propietario"] = "banca"
+        gd.tablero[propiedad]["casas"] = 0  # Vende todas las casas
+        gd.tablero[propiedad]["hotels"] = 0  # Vende todos los hoteles
+
+    gd.players[jugador]["propiedades"] = []  # El jugador pierde todas las propiedades
+    add_historial(f"{jugador} ha vendido todas sus propiedades al banco y ahora tiene {gd.players[jugador]['dinero']}€.")
+
+# Función para vender propiedades a otro jugador
+def vendre_a(jugador, comprador):
+    if comprador in gd.players:
+        for propiedad in gd.players[jugador]["propiedades"]:
+            precio_venta = gd.tablero[propiedad]["precio"] * 0.9  # 90% del precio de compra
+            gd.players[comprador]["dinero"] += precio_venta
+            gd.players[jugador]["dinero"] -= precio_venta
+            gd.tablero[propiedad]["propietario"] = comprador
+
+        gd.players[jugador]["propiedades"] = []  # El jugador pierde todas las propiedades
+        add_historial(f"{jugador} ha vendido todas sus propiedades a {comprador}.")
