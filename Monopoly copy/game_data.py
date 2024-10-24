@@ -42,7 +42,7 @@ players = {
 
 
 tablero = {
-    "Sortida": {"posicion": 0},
+    #"Sortida": {"posicion": 0},
 
     "Lauria": {
         "posicion": 1,
@@ -67,7 +67,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Sort": {"posicion": 3},
+    #"Sort": {"posicion": 3},
 
     "Marina": {
         "posicion": 4,
@@ -92,7 +92,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Presó": {"posicion": 6},
+    #"Presó": {"posicion": 6},
 
     "Muntan": {
         "posicion": 7,
@@ -117,7 +117,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Caixa": {"posicion": 9},
+    #"Caixa": {"posicion": 9},
 
     "S.Joan": {
         "posicion": 10,
@@ -142,7 +142,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Parking": {"posicion": 12},
+    #"Parking": {"posicion": 12},
 
     "Urquina": {
         "posicion": 13,
@@ -167,7 +167,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Sort 2": {"posicion": 15},
+    #"Sort 2": {"posicion": 15},
 
     "Rambles": {
         "posicion": 16,
@@ -192,7 +192,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Anr pró": {"posicion": 18},
+    #"Anr pró": {"posicion": 18},
 
     "P.Àngel": {
         "posicion": 19,
@@ -217,7 +217,7 @@ tablero = {
         "propietario": "banca"
     },
 
-    "Caixa 2": {"posicion": 21},
+    #"Caixa 2": {"posicion": 21},
 
     "Balmes": {
         "posicion": 22,
