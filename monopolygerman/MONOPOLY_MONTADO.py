@@ -121,7 +121,6 @@ def tauler(jugadores_ordenados, log_movimientos):
 
     print(f''' 
 +--------+--------+--------+--------+--------+--------+--------+  Banca                           
-
 |{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
 +--------+--------+--------+--------+--------+--------+--------+  {info_jugadores[0] if len(info_jugadores) > 0 else ""}

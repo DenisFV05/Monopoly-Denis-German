@@ -1,22 +1,26 @@
 
 import random
-import game_data as gd
-# PRIMERA PARTE MENÚ + ORDEN DE TIRADA
+
+# Definimos la banca
+banca = 1000000
+
+# PRIMERA PARTE: MENÚ + ORDEN DE TIRADA
+
 def mostrar_menu():
-    print ("======================================")
-    print ("---            MONOPOLY            ---")
-    print ("--------------------------------------")
-    print ("-------Hecho por: Denis y Germán------")
-    print ("======================================")
-    print ("======================================")
-    print ("----- Menú de Selección de Color -----")
-    print ("Seleccione su color:")
-    print ("1. Blau")
-    print ("2. Taronja")
-    print ("3. Vermell")
-    print ("4. Groc")   
-    print ("5. Salir")
-    print ("---------------------------------------")
+    print("======================================")
+    print("---            MONOPOLY            ---")
+    print("--------------------------------------")
+    print("-------Hecho por: Denis y Germán------")
+    print("======================================")
+    print("======================================")
+    print("----- Menú de Selección de Color -----")
+    print("Seleccione su color:")
+    print("1. Blau")
+    print("2. Taronja")
+    print("3. Vermell")
+    print("4. Groc")
+    print("5. Salir")
+    print("---------------------------------------")
 
 # Función para obtener la inicial del color
 def get_inicial_color(color):
@@ -34,7 +38,7 @@ def ordre_tirada(players):
     orden = "".join([player['Inicial'] for player in players])
     print(f"\nOrdre de tirada aleatori: {orden}")
     return players  # Se devuelve la lista de jugadores ordenada
-    
+
 # Función principal
 def main():
     players = []  # Lista para almacenar a los jugadores
@@ -80,7 +84,8 @@ def main():
             'Diners': 2000,
             'Propietats': [],
             'Especial': None,
-            'Posició': 0
+            'Posició': 0,
+            'Turnos_presion': 0  # Contador de turnos en prisión
         })
         print(f"Jugador {i + 1} ha elegido el color {color} y su nombre es {players[-1]['Inicial']}.")
 
@@ -92,18 +97,12 @@ def main():
     players = ordre_tirada(players)
     return players  # Devuelve la lista de jugadores en orden
 
-#SEGUNDA PARTE: ACTUALIZAR TABLERO Y JUEGO CON EL ORDEN CORRECTO
+# SEGUNDA PARTE: ACTUALIZAR TABLERO Y JUEGO CON EL ORDEN CORRECTO
 
-def tauler(jugadores_ordenados, log_movimientos):
+def tauler(jugadores_ordenados, log_movimientos, historial_acciones):
     # Definir el texto que sale en cada casilla del juego
-    c = []  # c = casilla
-    casa = []
-    hoteles = []
-    for i in range(0, 24):
-        c.append("")
-        casa.append("")
-        hoteles.append("")
-    
+    c = [""] * 24  # c = casilla
+
     # Llenar las posiciones del tablero con los jugadores según el orden
     for jugador in jugadores_ordenados:
         inicial = jugador['Inicial']
@@ -118,69 +117,48 @@ def tauler(jugadores_ordenados, log_movimientos):
         especial = jugador['Especial'] if jugador['Especial'] else "(res)"
         info_jugadores.append(f"Jugador {inicial} | Diners: {diners} | Carrers: {propietats} | Especial: {especial}")
 
+    # Limitar el historial de acciones a un número específico de líneas
+    max_historial = 5
+    while len(historial_acciones) > max_historial:
+        historial_acciones.pop(0)
 
     for i in range(len(c)):
         c[i] = c[i].ljust(6)
 
-    for calle in gd.tablero:
-        casas = gd.tablero[calle]["casas"]
-        hotel = gd.tablero[calle]["hoteles"]
-        pos = gd.tablero [calle]["posicion"]
-        if casas == 0 and hotel > 0:
-            casa [pos] = str(hotel) + "H" + '--'
-        elif casas > 0 and hotel == 0:
-            casa [pos] = str(casas) + "C" + '--'
-        elif casas > 0 and hotel > 0:
-            casa[pos] = str(casas) + "C" + str(hotel) + "H"
-        else:
-            casa[pos] = '----'
-
-        if pos in [7, 8, 10, 11, 19, 20, 22, 23]:
-            if casas > 0:
-                casa [pos] = str(casas) + "C" + '|'
-            else:
-                casa[pos] = '|'
-            if hotel > 0:
-                hoteles[pos] = str(hotel) + 'H' + '|'
-            else:
-                hoteles[pos] = '|'
-            
-
+    # Espacio central para mostrar el estado de la partida
+    historial_texto = "\n".join(historial_acciones).ljust(44)
 
     print(f''' 
-+--------+----{casa[13]}+----{casa[14]}+--------+----{casa[15]}+----{casa[16]}+--------+----  Banca                           
-|{c [12]}  |{c [13]}  |{c [14]}  |{c [15]}  |{c [16]}  |{c [17]}  |{c [18]}  |  Diners: {banca}
++--------+--------+--------+--------+--------+--------+--------+  Banca                           
+|{c[12]}  |{c[13]}  |{c[14]}  |{c[15]}  |{c[16]}  |{c[17]}  |{c[18]}  |  Diners: {banca}
 |Parking |Urqinoa |Fontan  |Sort    |Rambles |Pl.Cat  |Anr pró |
+|        |        |        |        |        |        |        |
 +--------+--------+--------+--------+--------+--------+--------+  {info_jugadores[0] if len(info_jugadores) > 0 else ""}
-|{c [11]}  {casa[11]}                                            |{c [19]}  {casa[19]} 
-|Aragó   {hoteles[11]}{log_movimientos[0].ljust(44)}|Angel   {hoteles[19]}
+|{c[11]}  |                                            |{c[19]}  | 
+|Aragó   |{historial_texto}  |Angel   |
 +--------+                                            +--------+  {info_jugadores[1] if len(info_jugadores) > 1 else ""}
-|{c [10]}  {casa[10]}                                            |{c [20]}  {casa[20]}
-|S.Joan  {hoteles[10]}{log_movimientos[1].ljust(42)}  |Augusta {hoteles[20]} 
+|{c[10]}  |                                            |{c[20]}  |
+|S.Joan  |{log_movimientos[1].ljust(44)}|Augusta |
 +--------+                                            +--------+  {info_jugadores[2] if len(info_jugadores) > 2 else ""}
-|{c [9]}  |                                            |{c [21]}  |
+|{c[9]}  |                                            |{c[21]}  |
 |Caixa   |{log_movimientos[1].ljust(44)}|Caixa   |
 +--------+                                            +--------+  {info_jugadores[3] if len(info_jugadores) > 3 else ""}
-|{c [8]}  {casa[8]}                                            |{c [22]}  {casa[22]}
-|Aribau  {hoteles [8]}                                            |Balmes  {hoteles[22]}
+|{c[8]}  |                                            |{c[22]}  |
+|Aribau  |                                            |Balmes  |
 +--------+                                            +--------+
-|{c [7]}  {casa [7]}                                            |{c [23]}  {casa[23]}
-|Muntan  {hoteles[7]}                                            |Gracia  {hoteles[23]}
-+--------+----{casa[5]}+----{casa[4]}+--------+----{casa[2]}+----{casa[1]}+--------+----
-|{c [6]}  |{c [5]}  |{c[ 4]}  |{c [3]}  |{c [2]}  |{c [1]}  |{c [0]}  |
+|{c[7]}  |                                            |{c[23]}  |
+|Muntan  |                                            |Gracia  |
++--------+--------+--------+--------+--------+-----+--------+
+|{c[6]}  |{c[5]}  |{c[4]}  |{c[3]}  |{c[2]}  |{c[1]}  |{c[0]}  |
 |Presó   |Consell |Marina  |Sort    |Rosell  |Lauria  |Sortida |
 +--------+--------+--------+--------+--------+--------+--------+
 ''')
-
-banca = 1000000
 
 def banca_check():
     global banca
     if banca <= 500000:
         banca += 1000000
     return
-
-#TERCERA PARTE: MOVIMIENTO DE JUGADORES USANDO EL ORDEN DEFINIDO
 
 # Función para tirar los dados
 def tirar_dados():
@@ -189,41 +167,52 @@ def tirar_dados():
     return dado1, dado2
 
 # Función para mover los jugadores
-def mover_jugadores(jugador, jugadores_ordenados, log_movimientos):
+def mover_jugadores(jugador, jugadores_ordenados, log_movimientos, historial_acciones):
     if jugador['Especial'] == 'Presó':
+        # Si está en prisión, aumentar el contador de turnos en prisión
+        jugador['Turnos_presion'] += 1
         dado1, dado2 = tirar_dados()
         log_movimientos[jugadores_ordenados.index(jugador)] = f"Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
         
         # Si saca dobles, sale de la prisión
         if dado1 == dado2:
             log_movimientos[jugadores_ordenados.index(jugador)] += f" \"{jugador['Inicial']}\" surt de la presó"
+            historial_acciones.append(f"\"{jugador['Inicial']}\" surt de la presó.")
             jugador['Especial'] = None
+            jugador['Turnos_presion'] = 0  # Reiniciar contador
             jugador['Posició'] = (jugador['Posició'] + dado1 + dado2) % 24
-        else:
-            log_movimientos[jugadores_ordenados.index(jugador)] += f" \"{jugador['Inicial']}\" segueix a la presó."
+        # Si no saca dobles y lleva 3 turnos en prisión
+        elif jugador['Turnos_presion'] >= 3:
+            jugador['Diners'] -= 500  # Pierde 500
+            historial_acciones.append(f"\"{jugador['Inicial']}\" paga 500 y sigue en prisión.")
+            log_movimientos[jugadores_ordenados.index(jugador)] += f" \"{jugador['Inicial']}\" ha pagat 500."
+            jugador['Turnos_presion'] = 0  # Reiniciar contador
+
+        # Mostrar el tablero y el estado después de mover
+        tauler(jugadores_ordenados, log_movimientos, historial_acciones)
+
     else:
         dado1, dado2 = tirar_dados()
-        log_movimientos[jugadores_ordenados.index(jugador)] = f"> Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
+        log_movimientos[jugadores_ordenados.index(jugador)] = f"Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
+        historial_acciones.append(f"\"{jugador['Inicial']}\" ha jugado y tirado {dado1 + dado2}.")
+
         jugador['Posició'] = (jugador['Posició'] + dado1 + dado2) % 24
+        tauler(jugadores_ordenados, log_movimientos, historial_acciones)
 
-    tauler(jugadores_ordenados, log_movimientos)  # Actualizar el tablero
+# PROGRAMA PRINCIPAL
+if __name__ == "__main__":            mover_jugadores(jugador, jugadores_ordenados, log_movimientos, historial_acciones)
 
-# Función para jugar el turno de cada jugador
-def jugar(jugadores_ordenados):
-    log_movimientos = [""] * len(jugadores_ordenados)  # Iniciar el log de movimientos para cada jugador
-    while True:
-        for jugador in jugadores_ordenados:
-            mover_jugadores(jugador, jugadores_ordenados, log_movimientos)  # Ahora se pasa log_movimientos correctamente
-            input("Presiona Enter para el siguiente jugador...")  # Pausa entre turnos para cada jugador
-            log_movimientos.pop(0)
-            log_movimientos.append("")
-
-
-
-# EJECUTAR EL JUEGO
 jugadores_ordenados = main()
-if jugadores_ordenados:
-    jugar(jugadores_ordenados)
-
-
-
+log_movimientos = [""] * len(jugadores_ordenados)  # Inicializar el log de movimientos
+historial_acciones = []  # Inicializar historial de acciones
+banca_check()
+    
+while True:
+        for jugador in jugadores_ordenados:
+            mover_jugadores(jugador, jugadores_ordenados, log_movimientos, historial_acciones)
+            if jugador['Diners'] <= 0:
+                print(f"¡El jugador \"{jugador['Inicial']}\" ha sido eliminado del juego!")
+                jugadores_ordenados.remove(jugador)
+                if not jugadores_ordenados:
+                    print("¡El juego ha terminado!")
+                    break
