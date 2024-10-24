@@ -8,7 +8,8 @@ players = {
         "diners":2000,
         "cartes":[],
         "posicion": 0,
-        "carcel": False
+        "carcel": False,
+        "turnos_prision": 0
     },
     "J-Groc":{
         "nom":"G",
@@ -16,7 +17,8 @@ players = {
         "diners":2000,
         "cartes":[],
         "posicion": 0,
-        "carcel": False
+        "carcel": False,
+        "turnos_prision": 0
     },
     "J-Taronja":{
         "nom":"T",
@@ -24,7 +26,8 @@ players = {
         "diners":2000,
         "cartes":[],
         "posicion": 0,
-        "carcel": False
+        "carcel": False,
+        "turnos_prision": 0
     },
     "J-Blau":{
         "nom":"B",
@@ -32,7 +35,8 @@ players = {
         "diners":2000,
         "cartes":[],
         "posicion": 0,
-        "carcel": False
+        "carcel": False,
+        "turnos_prision": 0
     },
 }
 

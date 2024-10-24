@@ -18,7 +18,7 @@ def banca_check():
         banca += 1000000
     return
 
-historial = ["a","b","c"]
+historial = []
 
 def add_historial(evento):
     global historial
@@ -42,9 +42,7 @@ def ordre_tirada(players):
 
 
 def tirar_dados():
-    a = random.randint(1,6)
-    b = random.randint(1,6)
-    return a + b, a == b
+    return random.randint(1, 6), random.randint(1, 6)
 
 
 
@@ -70,11 +68,11 @@ def comprar_propiedad(jugador):
         else:
             add_historial("Esta propiedad ya pertenece a alguien.")
 
-
+jugadores_ordenados = ordre_tirada(gd.players) 
 
 def tauler():
 
-    jugadores_ordenados = ordre_tirada(gd.players)  
+     
 
     c = [""] * 24 
 
@@ -122,4 +120,30 @@ def tauler():
 ''')
     
 
-tauler()
+
+
+def mover_jugadores(jugador_key):
+    jugador = gd.players[jugador_key]  
+    if jugador['carcel']:
+        dado1, dado2 = tirar_dados()
+        if dado1 == dado2:
+            jugador['carcel'] = False
+            jugador['turnos_prision'] = 0
+            jugador['posicion'] = (jugador['posicion'] + dado1 + dado2) % 24
+            add_historial(f"{jugador_key} ha tret dobles i ha sortir de la presó.")
+            add_historial(f"{jugador_key} es mou a la posició {jugador['posicion']}.")
+        else:
+            jugador['turnos_prision'] -= 1
+            if jugador['turnos_prision'] <= 0:
+                jugador['carcel'] = False
+                jugador['turnos_prision'] = 0
+                add_historial(f"{jugador_key} ha cumplido su tiempo en prisión y sale.")
+            else:
+                add_historial(f"A {jugador_key} li quedan {jugador['turnos_prision']} turns en la presó.")
+    else:
+        dado1, dado2 = tirar_dados()
+        jugador['posicion'] = (jugador['posicion'] + dado1 + dado2) % 24
+        add_historial(f"{jugador_key} ha avanzado a la posición {jugador['posicion']}.")
+    tauler()
+
+

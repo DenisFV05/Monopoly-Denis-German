@@ -68,7 +68,7 @@ def tirar_dados():
     return dado1, dado2
 
 # Función para mover los jugadores
-def mover_jugadores(jugador, jugadores_ordenados, log_movimientos):
+def mover_jugadores(jugador):
     if jugador['Especial'] == 'Presó':
         dado1, dado2 = tirar_dados()
         log_movimientos[jugadores_ordenados.index(jugador)] = f"Juga \"{jugador['Inicial']}\", ha sortit {dado1} i {dado2}"
