@@ -1,27 +1,9 @@
 import game_data as gd
-
 def add_historial(mensaje):
-    # Aquí puedes agregar la lógica para añadir mensajes al historial
+    # para q no salga todo en amarillo mas q nada, ahora lo muevo
     pass
 
-# Función para comprar una propiedad
-def comprar_propiedad(jugador):
-    for x in gd.tablero:
-        if gd.tablero[x]["propietario"] == "banca":
-            if gd.players[jugador]["posicion"] == gd.tablero[x]["posicion"]:
-                precio = gd.tablero[x]["Cmp. Trrny"]  # Precio de compra del terreno
-                if gd.players[jugador]["dinero"] >= precio:
-                    gd.players[jugador]["dinero"] -= precio
-                    gd.tablero[x]["propietario"] = jugador
-                    gd.players[jugador]["propiedades"].append(x)
-                    add_historial(f"{jugador} ha comprado {x} por {precio}€.")
-                else:
-                    add_historial(f"No tienes suficiente dinero para comprar {x}.")
-                return  # Salimos de la función después de intentar comprar
 
-    add_historial("Esta propiedad ya pertenece a alguien o no se ha encontrado.")
-
-# Función para comprar una casa
 def comprar_casa(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
@@ -31,7 +13,7 @@ def comprar_casa(jugador):
 
     if propiedad_actual:
         if gd.tablero[propiedad_actual]["casas"] < 4:
-            precio_casa = gd.tablero[propiedad_actual]["Ll. Casa"]  # Precio de la casa
+            precio_casa = gd.tablero[propiedad_actual]["Ll. Casa"]
             if gd.players[jugador]["dinero"] >= precio_casa:
                 gd.players[jugador]["dinero"] -= precio_casa
                 gd.tablero[propiedad_actual]["casas"] += 1
@@ -53,7 +35,7 @@ def comprar_hotel(jugador):
 
     if propiedad_actual:
         if gd.tablero[propiedad_actual]["casas"] >= 2 and gd.tablero[propiedad_actual]["hotels"] < 2:
-            precio_hotel = gd.tablero[propiedad_actual]["Ll. Hotel"]  # Precio del hotel
+            precio_hotel = gd.tablero[propiedad_actual]["Ll. Hotel"]
             if gd.players[jugador]["dinero"] >= precio_hotel:
                 gd.players[jugador]["dinero"] -= precio_hotel
                 gd.tablero[propiedad_actual]["hotels"] += 1
@@ -87,7 +69,7 @@ def mostrar_precios(jugador):
 def precio_banco(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
-        total_a_recibir += gd.tablero[propiedad]["Cmp. Trrny"] * 0.5  # 50% del precio de compra
+        total_a_recibir += gd.tablero[propiedad]["precio"] * 0.5  # 50% del precio de compra
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades al banco.")
 
@@ -95,14 +77,14 @@ def precio_banco(jugador):
 def precio_jugador(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
-        total_a_recibir += gd.tablero[propiedad]["Cmp. Trrny"] * 0.9  # 90% del precio de compra
+        total_a_recibir += gd.tablero[propiedad]["precio"] * 0.9  # 90% del precio de compra
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades a otro jugador.")
 
 # Función para vender propiedades al banco
 def vendre_al_banc(jugador):
     for propiedad in gd.players[jugador]["propiedades"]:
-        precio_venta = gd.tablero[propiedad]["Cmp. Trrny"] * 0.5  # 50% del precio de compra
+        precio_venta = gd.tablero[propiedad]["precio"] * 0.5  # 50% del precio de compra
         gd.players[jugador]["dinero"] += precio_venta
         gd.tablero[propiedad]["propietario"] = "banca"
         gd.tablero[propiedad]["casas"] = 0  # Vende todas las casas
@@ -115,7 +97,7 @@ def vendre_al_banc(jugador):
 def vendre_a(jugador, comprador):
     if comprador in gd.players:
         for propiedad in gd.players[jugador]["propiedades"]:
-            precio_venta = gd.tablero[propiedad]["Cmp. Trrny"] * 0.9  # 90% del precio de compra
+            precio_venta = gd.tablero[propiedad]["precio"] * 0.9  # 90% del precio de compra
             gd.players[comprador]["dinero"] += precio_venta
             gd.players[jugador]["dinero"] -= precio_venta
             gd.tablero[propiedad]["propietario"] = comprador
