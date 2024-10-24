@@ -189,204 +189,16 @@ def comprar_propiedad(jugador):
                     add_historial(f"{jugador} ha comprado {x} por {precio}€.")
                 else:
                     add_historial(f"No tienes suficiente dinero para comprar {x}.")
-                return  # Salimos de la función después de intentar comprar
+                return 
 
     add_historial("Esta propiedad ya pertenece a alguien o no se ha encontrado.")
 
-propiedades = {"Lauria": {
-        "posicion": 1,
-        "precio": 50,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 10,
-        "Ll. Hotel": 15,
-        "Cmp. Casa": 200,
-        "Cmp. Hotel": 250,
-        "propietario": "banca"
-    },
-    "Rossell": {
-        "posicion": 0,
-        "precio": 50,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 10,
-        "Ll. Hotel": 15,
-        "Cmp. Casa": 225,
-        "Cmp. Hotel": 255,
-        "propietario": "banca"
-    },
 
+import game_data as gd
+def add_historial(mensaje):
+    # para q no salga todo en amarillo mas q nada, ahora lo muevo
+    pass
 
-    "Marina": {
-        "posicion": 4,
-        "precio": 50,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 15,
-        "Ll. Hotel": 15,
-        "Cmp. Casa": 250,
-        "Cmp. Hotel": 260,
-        "propietario": "banca"
-    },
-    "Consell": {
-        "posicion": 5,
-        "precio": 50,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 15,
-        "Ll. Hotel": 20,
-        "Cmp. Casa": 275,
-        "Cmp. Hotel": 265,
-        "propietario": "banca"
-    },
-
-
-    "Muntan": {
-        "posicion": 7,
-        "precio": 60,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 20,
-        "Ll. Hotel": 20,
-        "Cmp. Casa": 300,
-        "Cmp. Hotel": 270,
-        "propietario": "banca"
-    },
-    "Aribau": {
-        "posicion": 8,
-        "precio": 60,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 20,
-        "Ll. Hotel": 20,
-        "Cmp. Casa": 325,
-        "Cmp. Hotel": 275,
-        "propietario": "banca"
-    },
-
-
-    "S.Joan": {
-        "posicion": 10,
-        "precio": 60,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 25,
-        "Ll. Hotel": 25,
-        "Cmp. Casa": 350,
-        "Cmp. Hotel": 280,
-        "propietario": "banca"
-    },
-    "Aragó": {
-        "posicion": 11,
-        "precio": 60,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 25,
-        "Ll. Hotel": 25,
-        "Cmp. Casa": 375,
-        "Cmp. Hotel": 285,
-        "propietario": "banca"
-    },
-
-
-    "Urquina": {
-        "posicion": 13,
-        "precio": 70,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 30,
-        "Ll. Hotel": 25,
-        "Cmp. Casa": 400,
-        "Cmp. Hotel": 290,
-        "propietario": "banca"
-    },
-    "Fontan": {
-        "posicion": 14,
-        "precio": 70,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 30,
-        "Ll. Hotel": 30,
-        "Cmp. Casa": 425,
-        "Cmp. Hotel": 300,
-        "propietario": "banca"
-    },
-
-
-    "Rambles": {
-        "posicion": 16,
-        "precio": 70,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 35,
-        "Ll. Hotel": 30,
-        "Cmp. Casa": 450,
-        "Cmp. Hotel": 310,
-        "propietario": "banca"
-    },
-    "Pl.Cat": {
-        "posicion": 17,
-        "precio": 70,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 35,
-        "Ll. Hotel": 30,
-        "Cmp. Casa": 475,
-        "Cmp. Hotel": 320,
-        "propietario": "banca"
-    },
-
-
-    "P.Àngel": {
-        "posicion": 19,
-        "precio": 80,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 40,
-        "Ll. Hotel": 35,
-        "Cmp. Casa": 500,
-        "Cmp. Hotel": 330,
-        "propietario": "banca"
-    },
-    "Augusta": {
-        "posicion": 20,
-        "precio": 80,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 40,
-        "Ll. Hotel": 35,
-        "Cmp. Casa": 525,
-        "Cmp. Hotel": 340,
-        "propietario": "banca"
-    },
-
-
-    "Balmes": {
-        "posicion": 22,
-        "precio": 80,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 50,
-        "Ll. Hotel": 40,
-        "Cmp. Casa": 550,
-        "Cmp. Hotel": 350,
-        "propietario": "banca"
-    },
-    "Gràcia": {
-        "posicion": 23,
-        "precio": 80,
-        "casas": 0,
-        "hoteles": 0,
-        "Ll. Casa": 50,
-        "Ll. Hotel": 50,
-        "Cmp. Casa": 525,
-        "Cmp. Hotel": 360,
-        "propietario": "banca"
-    }
-}
-
-
-# Función para comprar una casa
 def comprar_casa(jugador):
     propiedad_actual = None
     for nombre_propiedad, detalles in gd.tablero.items():
@@ -396,7 +208,7 @@ def comprar_casa(jugador):
 
     if propiedad_actual:
         if gd.tablero[propiedad_actual]["casas"] < 4:
-            precio_casa = gd.tablero[propiedad_actual]["Ll. Casa"]  # Precio de la casa
+            precio_casa = gd.tablero[propiedad_actual]["Ll. Casa"]
             if gd.players[jugador]["dinero"] >= precio_casa:
                 gd.players[jugador]["dinero"] -= precio_casa
                 gd.tablero[propiedad_actual]["casas"] += 1
@@ -418,7 +230,7 @@ def comprar_hotel(jugador):
 
     if propiedad_actual:
         if gd.tablero[propiedad_actual]["casas"] >= 2 and gd.tablero[propiedad_actual]["hotels"] < 2:
-            precio_hotel = gd.tablero[propiedad_actual]["Ll. Hotel"]  # Precio del hotel
+            precio_hotel = gd.tablero[propiedad_actual]["Ll. Hotel"]
             if gd.players[jugador]["dinero"] >= precio_hotel:
                 gd.players[jugador]["dinero"] -= precio_hotel
                 gd.tablero[propiedad_actual]["hotels"] += 1
@@ -452,7 +264,7 @@ def mostrar_precios(jugador):
 def precio_banco(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
-        total_a_recibir += gd.tablero[propiedad]["Cmp. Trrny"] * 0.5  # 50% del precio de compra
+        total_a_recibir += gd.tablero[propiedad]["precio"] * 0.5  # 50% del precio de compra
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades al banco.")
 
@@ -460,14 +272,14 @@ def precio_banco(jugador):
 def precio_jugador(jugador):
     total_a_recibir = 0
     for propiedad in gd.players[jugador]["propiedades"]:
-        total_a_recibir += gd.tablero[propiedad]["Cmp. Trrny"] * 0.9  # 90% del precio de compra
+        total_a_recibir += gd.tablero[propiedad]["precio"] * 0.9  # 90% del precio de compra
 
     add_historial(f"{jugador} podría recibir {total_a_recibir}€ si vende todas sus propiedades a otro jugador.")
 
 # Función para vender propiedades al banco
 def vendre_al_banc(jugador):
     for propiedad in gd.players[jugador]["propiedades"]:
-        precio_venta = gd.tablero[propiedad]["Cmp. Trrny"] * 0.5  # 50% del precio de compra
+        precio_venta = gd.tablero[propiedad]["precio"] * 0.5  # 50% del precio de compra
         gd.players[jugador]["dinero"] += precio_venta
         gd.tablero[propiedad]["propietario"] = "banca"
         gd.tablero[propiedad]["casas"] = 0  # Vende todas las casas
@@ -480,7 +292,7 @@ def vendre_al_banc(jugador):
 def vendre_a(jugador, comprador):
     if comprador in gd.players:
         for propiedad in gd.players[jugador]["propiedades"]:
-            precio_venta = gd.tablero[propiedad]["Cmp. Trrny"] * 0.9  # 90% del precio de compra
+            precio_venta = gd.tablero[propiedad]["precio"] * 0.9  # 90% del precio de compra
             gd.players[comprador]["dinero"] += precio_venta
             gd.players[jugador]["dinero"] -= precio_venta
             gd.tablero[propiedad]["propietario"] = comprador
@@ -488,11 +300,6 @@ def vendre_a(jugador, comprador):
         gd.players[jugador]["propiedades"] = []  # El jugador pierde todas las propiedades
         add_historial(f"{jugador} ha vendido todas sus propiedades a {comprador}.")
 
-
-import random
-
-# Variables globales
-import random
 
 # Variables globales
 banca = 1000000
